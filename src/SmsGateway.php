@@ -1,5 +1,7 @@
 <?php
 
+namespace Dreamer1258/SmsGateway;
+
 class SmsGateway
 {
     public function __construct()
