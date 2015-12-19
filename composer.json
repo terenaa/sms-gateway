@@ -1,7 +1,7 @@
 {
-	"name": "dreamer1258/smsgateway",
+	"name": "Dreamer1258/SMSGateway",
 	"description": "Simple SMS Gateway",
-	"keywords": ["dreamer1258", "sms"],
+	"keywords": ["dreamer1258", "smsgateway"],
 	"license": "MIT",
 	"authors": [
 		{
@@ -17,7 +17,7 @@
 		"php": ">=5.3.0"
 	},
 	"require-dev": {
-		"php": ">5.3.0"
+		"php": ">=5.3.0"
 	},
 	"autoload": {
 		"psr-4": {
