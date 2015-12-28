@@ -7,7 +7,7 @@
  * @category    Utils
  * @author      Krzysztof Janda <k.janda@the-world.pl>
  * @license     https://opensource.org/licenses/MIT MIT
- * @version     1.0
+ * @version     1.1
  * @link        https://www.github.com/terenaa/sms-gateway
  *
  */
@@ -15,10 +15,17 @@
 namespace terenaa\SmsGateway;
 
 
+/**
+ * Class Curl
+ * @package terenaa\SmsGateway
+ */
 class Curl
 {
     private $ch;
 
+    /**
+     * Curl constructor.
+     */
     public function __construct()
     {
         $this->ch = curl_init();
@@ -31,8 +38,20 @@ class Curl
             CURLOPT_COOKIEJAR => $cookie_file,
             CURLOPT_COOKIEFILE => $cookie_file
         ));
+
+        if (($error = curl_error($this->ch))) {
+            throw new SmsGatewayException("cURL error: {$error}");
+        }
     }
 
+    /**
+     * Sends a single cURL request.
+     *
+     * @param string $url URL to open
+     * @param array $params params to send via POST
+     * @return mixed
+     * @throws SmsGatewayException
+     */
     public function sendRequest($url, array $params)
     {
         curl_setopt_array($this->ch, array(
@@ -41,15 +60,21 @@ class Curl
         ));
 
         $response = curl_exec($this->ch);
-        $error = curl_error($this->ch);
 
-        if ($error) {
-            throw new SmsGatewayException($error);
+        if (($error = curl_error($this->ch))) {
+            throw new SmsGatewayException("cURL error: {$error}");
         }
 
         return $response;
     }
 
+    /**
+     * Gets a value of input field of given name from HTML passed by first parameter.
+     *
+     * @param string $html HTML string
+     * @param string $propertyName property name to find
+     * @return mixed
+     */
     public function getHtmlProperty($html, $propertyName)
     {
         if (!preg_match('/name=\"' . $propertyName . '\".*?value=\"([^\"]+)\"/', $html, $matches)) {
@@ -59,6 +84,9 @@ class Curl
         return isset($matches[1]) ? $matches[1] : null;
     }
 
+    /**
+     * Closes cURL.
+     */
     public function close()
     {
         if ($this->ch) {

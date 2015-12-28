@@ -16,6 +16,10 @@
 namespace terenaa\SmsGateway;
 
 
+/**
+ * Class SmsGatewayException
+ * @package terenaa\SmsGateway
+ */
 class SmsGatewayException extends \Exception
 {
 }
