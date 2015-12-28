@@ -66,12 +66,16 @@ if (!$phone || !$msg) {
     exit;
 }
 
-$sms = new SmsGateway();
-
-if ($sms->send($phone, $msg, $sig, $phoneback)) {
-    echo "Message has been sent.\n";
-} else {
-    echo "Something went wrong...\n";
+try {
+    $sms = new SmsGateway();
+    
+    if ($sms->send($phone, $msg, $sig, $phoneback)) {
+        echo "Message has been sent.\n";
+    } else {
+        echo "Something went wrong...\n";
+    }
+} catch (SmsGatewayException $e) {
+    echo $e->getMessage();
 }
 
 function fetchOpt($opts, array $names)
