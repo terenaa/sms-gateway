@@ -19,7 +19,7 @@ use terenaa\SmsGateway\SmsGateway;
 
 try {
     $sms = new SmsGateway();
-    $sms->send('123456789', 'Test nowej wersji');
+    $sms->send('123456789', 'The message');
 } catch (SmsGatewayException $e) {
     echo $e->getMessage();
 }
