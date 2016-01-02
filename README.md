@@ -91,7 +91,7 @@ function fetchOpt($opts, array $names)
 }
 ```
 
-### Contact book
+### Phone book
 The previous example extended with a phone book.
 ```php
 //require_once __DIR__ . '/vendor/autoload.php';
